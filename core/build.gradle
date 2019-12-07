@@ -1,0 +1,17 @@
+apply plugin: "java"
+
+sourceCompatibility = 1.6
+dependencies {
+    fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.github.Navigine:Android-SDK:20190228'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    'junit:junit:4.12'
+}
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+sourceSets.main.java.srcDirs = [ "src/" ]
+
+
+eclipse.project {
+    name = appName + "-core"
+}

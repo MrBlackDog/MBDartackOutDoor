@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">artack2</string>
+    <string name="Permission_Error">Permission Error</string>
+    <string name="Permission_Explanation">In order to work application requires: Camera. Using the Camera AR application can create a virtual objects in front of you that you can interact with.</string>
+    <string name="No_necessary_sensor">Sorry, there are no necessary sensors in your phone.
+        The application will be closed.</string>
+    <string name="Request_Permission">
+        Please accept all required permissions.\n
+        Otherwise it will not work correctly or will not work.</string>
+    <string name="provider_gps">GPS</string>
+    <string name="provider_network">Network</string>
+    <string name="location_settings">Location settings</string>
+</resources>
