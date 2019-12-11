@@ -78,9 +78,9 @@ public class Main extends ApplicationAdapter {
 
 	public static final float ymodp = (float)Math.sqrt(0.5d); //multiply this with y to project
 	public static final float ymodu = 1f/ymodp; //multiply this with y to unproject
-	float frX;
-	float frY;
-	float frZ;
+	public static float frX =0;
+	public static float frY =0;
+	public static float frZ =0;
 
 	public static final float ppm = 32; //pixels per meter
 	public static final float mpp = 1f/ppm;// meters per pixel
@@ -152,7 +152,7 @@ public class Main extends ApplicationAdapter {
 			longSide = shortSide;
 			shortSide = Gdx.graphics.getWidth();
 		}
-        GetCoords();
+      //  GetCoords();
 		img = new Texture("ic_account_box_black_48dp.jpg");
 
 		camera = new Cam(38.7f, 0.2f, 10000f);
@@ -211,16 +211,17 @@ public class Main extends ApplicationAdapter {
 		// list.addAll(NavigineSDK.getNavigation().getLocation().getSubLocation(2).venues);
        list3 = new ArrayList<Icon>();
 
-       list3.add(new Icon(0,0,0 ,"ic_account_box_black_48dpjpg"));
+       //list3.add(new Icon(0,0,0 ,"ic_account_box_black_48dpjpg"));
 		//list3.add(new Icon(2846226.050f,2200351.060f,5249264.823f ,"ic_account_box_black_48dp.jpg"));
       // list3.add(new Icon(0,76,0 ,"badlogic.jpg"));
 
       // list3.add(new Icon(340,0,0 ,"badlogic.jpg"));
       // list3.add(new Icon(340,76,0 ,"badlogic.jpg"));
-
 		Connect();
 
-       list3.add(new Icon(frX = Float.parseFloat(ws[1]),frY = Float.parseFloat(ws[2]),frZ = Float.parseFloat(ws[3]) ,"ic_account_box_black_48dp.jpg"));
+       //list3.add(new Icon(frX = Float.parseFloat(ws[1]),frY = Float.parseFloat(ws[2]),frZ = Float.parseFloat(ws[3]) ,"ic_account_box_black_48dp.jpg"));
+
+        list3.add(new Icon(frX,frY ,0  ,"ic_account_box_black_48dp.jpg"));
 
 		//list3.add(new Icon((Vector3) _ws,"ic_account_box_black_48dp.jpg"));
 
@@ -243,7 +244,7 @@ public class Main extends ApplicationAdapter {
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		    Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
 			camera.update(orientationProvider);
-			GetCoords();
+			//GetCoords();
 /*
         {
             // Sign rotation. Front to the user
@@ -331,6 +332,9 @@ Projection
 		int p=0;
 		while(iterator2.hasNext()){
 			Icon obj = iterator2.next();
+			obj.coord.x = frX;
+			obj.coord.y = frY;
+			obj.coord.z = 0;
 			//Vector3 Venuecoord = new Vector3(obj.x,obj.y,10);
 			Vector3 difference = obj.coord.cpy().sub(camera.position);
 			// Скалярное произведение меньше нуля в нужном полупространстве.

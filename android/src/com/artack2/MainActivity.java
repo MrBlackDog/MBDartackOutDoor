@@ -141,7 +141,8 @@ public class MainActivity extends Activity {
             return "";
         geodeticLlaValues  =new Ecef2LlaConverter.GeodeticLlaValues( Math.toRadians(location.getLatitude()), Math.toRadians(location.getLongitude()),location.getAltitude());
        double[] positionEcefMeters = Lla2EcefConverter.convertFromLlaToEcefMeters(geodeticLlaValues);
-        Cam.startPos = new Vector3( (float) positionEcefMeters[0], (float) positionEcefMeters[1], (float) positionEcefMeters[2]);
+      //  Cam.startPos = new Vector3( (float) positionEcefMeters[0], (float) positionEcefMeters[1], (float) positionEcefMeters[2]);
+        Cam.startPos = new Vector3( (float) positionEcefMeters[0], (float) positionEcefMeters[1], 0);
        return String.format(
                 "Coordinates: x = %1$.4f, y = %2$.4f, z = %3$.4f",
                 positionEcefMeters[0], positionEcefMeters[1],positionEcefMeters[2]);

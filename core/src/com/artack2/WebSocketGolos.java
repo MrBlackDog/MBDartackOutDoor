@@ -54,12 +54,15 @@ public class WebSocketGolos extends WebSocketListener {
         if (Mass.length > 1) {
             Message = Mass[1].split(" ");
         }
+        Main.frX = Float.parseFloat(Message[0].replace(',','.'));
+        Main.frY = Float.parseFloat(Message[1].replace(',','.'));
+        //Main.frZ = Float.parseFloat(Message[2].replace(',','.'));
 
-        callback.callingBack(Message);
+        //callback.callingBack(Message);
 
-       // String Guid;
+      /* // String Guid;
        // Color color;
-       /* switch (Code){
+        switch (Code){
             case "id":
                 Game.Me.Connected = true;
                 Guid = Message[0];
