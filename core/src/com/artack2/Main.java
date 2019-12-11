@@ -51,8 +51,12 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.WebSocket;
 
 public class Main extends ApplicationAdapter {
+	private SocketManager sm;
+	static String[] ws;
+
 	/** ligdx */
 	private SpriteBatch batch;
 	private SpriteBatch batch2;
@@ -208,14 +212,24 @@ public class Main extends ApplicationAdapter {
        list3 = new ArrayList<Icon>();
 
        list3.add(new Icon(0,0,0 ,"ic_account_box_black_48dpjpg"));
+		//list3.add(new Icon(2846226.050f,2200351.060f,5249264.823f ,"ic_account_box_black_48dp.jpg"));
       // list3.add(new Icon(0,76,0 ,"badlogic.jpg"));
 
       // list3.add(new Icon(340,0,0 ,"badlogic.jpg"));
       // list3.add(new Icon(340,76,0 ,"badlogic.jpg"));
-       list3.add(new Icon(frX,frY,frZ ,"ic_account_box_black_48dp.jpg"));
+
+		Connect();
+
+       list3.add(new Icon(frX = Float.parseFloat(ws[1]),frY = Float.parseFloat(ws[2]),frZ = Float.parseFloat(ws[3]) ,"ic_account_box_black_48dp.jpg"));
+
+		//list3.add(new Icon((Vector3) _ws,"ic_account_box_black_48dp.jpg"));
+
+		//list3.add(new Icon(frX = 2846226.050f,frY = 2200351.060f,frZ = 5249264.823f,"ic_account_box_black_48dp.jpg"));
        //list3.add(new Icon(1,-1,0 ,"badlogic.jpg"));
-
-
+	}
+	public void Connect() {
+		sm = new SocketManager();
+		WebSocket _ws = sm.Connect();
 	}
 
 	@Override
@@ -252,8 +266,6 @@ public class Main extends ApplicationAdapter {
 
 		//	DrawVenue();
 			DrawIcon();
-
-
 
 
 /*
@@ -338,6 +350,7 @@ Projection
 			font.draw(batch, String.format(Locale.ENGLISH, "Projection{\n%.2f,\n%.2f,\n%.2f}",projection.x,projection.y,projection.z),(int)(Gdx.graphics.getWidth()*(0.05f+0.2f*p)), (int) (Gdx.graphics.getHeight()*0.95f));
 			font.draw(batch, String.format(Locale.ENGLISH, "Friend{\n%.2f,\n%.2f,\n%.2f}",frX,frY,frZ),(int)(Gdx.graphics.getWidth()*(0.05f)), (int) (Gdx.graphics.getHeight()*0.5f));
 			font.draw(batch, String.format(Locale.ENGLISH, "Cam{\n%.2f,\n%.2f,\n%.2f}",camera.position.x,camera.position.y,camera.position.z),(int)(Gdx.graphics.getWidth()*(0.05f)), (int) (Gdx.graphics.getHeight()*0.2f));
+
 			++p;
 		}
 		batch.end();

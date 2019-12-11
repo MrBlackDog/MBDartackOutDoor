@@ -1,12 +1,15 @@
 package com.artack2;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,7 +20,6 @@ import com.google.location.lbs.gnss.gps.pseudorange.Lla2EcefConverter;
 import java.io.IOException;
 
 
-
 //import androidx.annotation.NonNull;
 //import androidx.core.app.ActivityCompat;
 
@@ -25,7 +27,8 @@ public class MainActivity extends Activity {
 
     Ecef2LlaConverter.GeodeticLlaValues geodeticLlaValues;
     int PERMISSION_REQUEST_CODE;
-    private Context mContext     = this;
+
+    private Context mContext = this;
 
     TextView tvEnabledGPS;
     TextView tvStatusGPS;
@@ -56,6 +59,16 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                 1000 * 10, 10, locationListener);
         locationManager.requestLocationUpdates(
@@ -74,8 +87,7 @@ public class MainActivity extends Activity {
 
         @Override
         public void onLocationChanged(Location location) {
-            if(Cam.startPos != null)
-            {
+            if (Cam.startPos != null) {
                 Intent intent = new Intent(mContext, AndroidLauncher.class);
                 mContext.startActivity(intent);
             }
@@ -90,6 +102,16 @@ public class MainActivity extends Activity {
         @Override
         public void onProviderEnabled(String provider) {
             checkEnabled();
+            if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             showLocation(locationManager.getLastKnownLocation(provider));
         }
 
